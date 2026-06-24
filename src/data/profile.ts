@@ -1,19 +1,21 @@
 /**
- * Raw portfolio content. Edit this file to update the site copy.
- * It is validated against the schema in `schema.ts` at build time.
+ * Raw portfolio content. Edit this file to update hero copy and contacts.
+ * Validated against `schema.ts` at build time.
  */
 export const profileData = {
   name: "Eldar Dadashov",
   role: "Senior Fullstack Engineer",
   yearsExperience: 6,
-  // Personal hero line — placeholder vector, swap for your own voice.
   tagline: "I own features end to end, from the API to the interface.",
-  stack: ["Vue", "React", "TypeScript", "Node.js", "PHP / Symfony"],
-  availability:
-    "Open to fully remote roles worldwide and to EU relocation with visa sponsorship.",
+  heroStack: "Vue 3 · TypeScript · Node · NestJS · PostgreSQL · Docker · AWS",
+  availability: "Open to remote worldwide and EU relocation.",
   contacts: [
-    { label: "Email", href: "mailto:eldar.dadashov16@gmail.com" },
-    { label: "GitHub", href: "https://github.com/eldardada" },
-    { label: "Telegram", href: "https://t.me/eldarda" },
+    {
+      label: "eldar.dadashov16@gmail.com",
+      href: "mailto:eldar.dadashov16@gmail.com",
+      tag: "EMAIL ↗",
+    },
+    { label: "GitHub", href: "https://github.com/eldardada", tag: "CODE ↗" },
+    { label: "Telegram", href: "https://t.me/eldarda", tag: "DM ↗" },
   ],
 };

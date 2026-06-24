@@ -1,55 +1,164 @@
-:root {
-  --bg: #0b0d10;
-  --bg-elev: #14171c;
-  --text: #e7e9ea;
-  --text-dim: #9aa4ad;
-  --accent: #2dd4bf;
-  --border: #232830;
-  --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, monospace;
-  --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-}
-
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
-
-html {
-  scroll-behavior: smooth;
-}
-
+html,
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--sans);
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
+  background: oklch(0.17 0.015 50);
 }
-
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
-
 ::selection {
-  background: var(--accent);
-  color: #04110f;
+  background: oklch(0.74 0.17 55);
+  color: oklch(0.16 0.015 50);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.3 0.02 50);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-/* Preact island button (rendered client-side, styled globally) */
-.copy-email {
-  font-family: var(--mono);
-  font-size: 0.9rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text);
-  cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
+/* Featured case-study block */
+.featured-case {
+  border: 1px solid var(--line);
+  transition: border-color 0.3s;
 }
-.copy-email:hover {
+.featured-case:hover {
   border-color: var(--accent);
-  transform: translateY(-1px);
+}
+.case-cta {
+  display: inline-block;
+  transition: color 0.3s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.featured-case:hover .case-cta {
+  color: var(--accent);
+  transform: translateX(5px);
+}
+
+/* Hover behaviours (ported from Claude Design's style-hover attribute) */
+.nav-link {
+  transition: color 0.3s;
+}
+.nav-link:hover {
+  color: var(--text);
+}
+.btn-primary {
+  transition: filter 0.3s;
+}
+.btn-primary:hover {
+  filter: brightness(1.08);
+}
+.btn-outline {
+  transition: border-color 0.3s, color 0.3s;
+}
+.btn-outline:hover {
+  border-color: var(--accent);
+}
+.contact-row {
+  position: relative;
+}
+/* crisp accent rule that wipes in from the left, replacing the divider */
+.contact-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: var(--accent);
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-row:hover::after {
+  width: 100%;
+}
+/* the big label stays bone-white, never floods to accent */
+.c-name {
+  transition: color 0.3s;
+}
+.contact-row:hover .c-name {
+  color: var(--text);
+}
+/* only the small tag picks up the accent, with a gentle nudge */
+.c-tag {
+  transition: color 0.3s, transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.contact-row:hover .c-tag {
+  color: var(--accent);
+  transform: translateX(5px);
+}
+
+/* Film-grain texture over the whole page (signature atmosphere, not glass) */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Tech marquee (bolder, signature) */
+.marquee {
+  --mq-gap: clamp(2rem, 4vw, 3.5rem);
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  gap: var(--mq-gap);
+  user-select: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--mq-gap);
+  flex-shrink: 0;
+  min-width: 100%;
+  padding-right: var(--mq-gap);
+  animation: marquee 34s linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+.marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mq-gap);
+  white-space: nowrap;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-weight: 600;
+  font-size: clamp(26px, 4vw, 54px);
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.marquee__item::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+  }
 }

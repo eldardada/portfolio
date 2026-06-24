@@ -1,9 +1,970 @@
 ---
 import Base from "../layouts/Base.astro";
-import Hero from "../components/Hero.astro";
 import { profile } from "../data/content";
+
+const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in production`;
 ---
 
 <Base title={`${profile.name} — ${profile.role}`}>
-  <Hero />
+  <div id="ed-portfolio" style="--bg:oklch(0.17 0.015 50);--surface:oklch(0.22 0.02 50);--text:oklch(0.93 0.012 85);--dim:oklch(0.68 0.015 75);--accent:oklch(0.74 0.17 55);--plum:oklch(0.30 0.06 350);--line:oklch(0.32 0.02 50);background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
+    <canvas id="hero-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
+    <div style="position:relative;z-index:1">
+
+    <nav style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;padding:22px clamp(20px,4vw,44px);font-family:'JetBrains Mono',monospace">
+      <a href="#hero" data-magnetic style="display:flex;align-items:center;gap:9px;font-size:13px;letter-spacing:.06em;color:var(--text)">
+        <span style="width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block"></span>ELDAR DADASHOV
+      </a>
+      <div style="display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);font-size:12.5px;letter-spacing:.08em;color:var(--dim)">
+        <a href="#about" data-magnetic class="nav-link">ABOUT</a>
+        <a href="#skills" data-magnetic class="nav-link">SKILLS</a>
+        <a href="#work" data-magnetic class="nav-link">WORK</a>
+        <a href="#contact" data-magnetic class="nav-link">CONTACT</a>
+      </div>
+    </nav>
+
+    <section id="hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px clamp(20px,5vw,40px) 90px;overflow:hidden">
+      <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.18em;color:var(--accent);text-transform:uppercase">{eyebrow}</div>
+        <h1 id="hero-name" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(56px,14.5vw,186px);line-height:0.88;letter-spacing:-0.04em;color:var(--text);margin:20px 0 28px;transition:opacity 1s cubic-bezier(.16,1,.3,1)">ELDAR<br />DADASHOV</h1>
+        <p style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:clamp(18px,2vw,24px);line-height:1.45;color:var(--text);max-width:30ch">{profile.tagline}</p>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.06em;color:var(--dim);margin-top:20px;max-width:46ch;line-height:1.9">{profile.heroStack}</div>
+        <div style="display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center">
+          <a href="#contact" data-magnetic class="btn-primary" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;background:var(--accent);color:oklch(0.16 0.015 50);padding:15px 26px;border-radius:3px;white-space:nowrap">Get in touch</a>
+          <a href="/cv.pdf" download data-magnetic class="btn-outline" style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:15px;color:var(--text);padding:15px 26px;border-radius:3px;border:1px solid var(--line);white-space:nowrap">Download CV</a>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;color:var(--dim)">( SCROLL )</div>
+    </section>
+
+    <div class="marquee" aria-hidden="true" style="border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(26px,4vh,46px) 0">
+      <div class="marquee__track">
+        <span class="marquee__item">Vue</span><span class="marquee__item">TypeScript</span><span class="marquee__item">React</span><span class="marquee__item">Node.js</span><span class="marquee__item">NestJS</span><span class="marquee__item">PHP</span><span class="marquee__item">Symfony</span><span class="marquee__item">PostgreSQL</span><span class="marquee__item">Redis</span><span class="marquee__item">BullMQ</span><span class="marquee__item">Next.js</span><span class="marquee__item">Drizzle</span><span class="marquee__item">Docker</span><span class="marquee__item">Playwright</span>
+      </div>
+      <div class="marquee__track">
+        <span class="marquee__item">Vue</span><span class="marquee__item">TypeScript</span><span class="marquee__item">React</span><span class="marquee__item">Node.js</span><span class="marquee__item">NestJS</span><span class="marquee__item">PHP</span><span class="marquee__item">Symfony</span><span class="marquee__item">PostgreSQL</span><span class="marquee__item">Redis</span><span class="marquee__item">BullMQ</span><span class="marquee__item">Next.js</span><span class="marquee__item">Drizzle</span><span class="marquee__item">Docker</span><span class="marquee__item">Playwright</span>
+      </div>
+    </div>
+
+    <section id="about" style="max-width:1120px;margin:0 auto;padding:clamp(90px,13vh,170px) clamp(20px,5vw,40px);position:relative">
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(24px,5vw,72px);align-items:start">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);padding-top:10px">/ about</div>
+        <div>
+          <h2 data-words style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(28px,4.2vw,52px);line-height:1.08;letter-spacing:-0.02em;color:var(--text);max-width:18ch">I build the whole thing.</h2>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--dim);max-width:60ch;margin-top:26px">Six years in, I move comfortably from schema design and API internals up to the pixels a user actually touches, and I care about both equally. I am strongest end to end. I have a soft spot for Vue, and I gravitate toward work where the hard part is real.</p>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(17px,1.5vw,21px);line-height:1.65;color:var(--dim);max-width:60ch;margin-top:18px">Open to remote roles worldwide, and ready to relocate within the EU.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" style="max-width:1120px;margin:0 auto;padding:clamp(70px,9vh,120px) clamp(20px,5vw,40px);position:relative">
+      <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:36px">/ skills</div>
+
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(20px,4vw,56px);align-items:baseline;border-top:1px solid var(--line);padding:30px 0">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Frontend</div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Vue 3</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">React</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Next.js</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">TypeScript</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Vite</span>
+        </div>
+      </div>
+
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(20px,4vw,56px);align-items:baseline;border-top:1px solid var(--line);padding:30px 0">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Backend</div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Node.js</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">NestJS</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">PHP</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Symfony</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Laravel</span>
+        </div>
+      </div>
+
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(20px,4vw,56px);align-items:baseline;border-top:1px solid var(--line);padding:30px 0">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Data</div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">PostgreSQL</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Redis</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Prisma</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Drizzle</span>
+        </div>
+      </div>
+
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(20px,4vw,56px);align-items:baseline;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:30px 0">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Infra</div>
+        <div style="display:flex;flex-wrap:wrap;gap:14px 30px">
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Docker</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">AWS</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">GitLab CI/CD</span>
+          <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.4vw,30px);color:var(--text)">Playwright</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" style="max-width:1120px;margin:0 auto;padding:clamp(70px,11vh,150px) clamp(20px,5vw,40px);position:relative">
+      <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px">/ experience</div>
+      <h2 data-words style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(28px,4.2vw,52px);line-height:1.06;letter-spacing:-0.02em;color:var(--text);max-width:16ch;margin-bottom:54px">Work that moved a number.</h2>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div data-reveal style="border-left:1px solid var(--line);padding:8px 0 40px 30px;position:relative">
+          <span style="position:absolute;left:-5.5px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent)"></span>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Video platform · 50,000 users</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(22px,2.6vw,32px);color:var(--text);margin:10px 0 12px">Frontend at scale</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(16px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:62ch">Led the Vue 2 to 3 migration across <span style="color:var(--accent)">2,500 plus components</span> without freezing feature work. Rebuilt the toolchain on Vite and took the production build from <span style="color:var(--accent)">10 minutes to 30 seconds</span>, so the whole team shipped faster every single day.</p>
+        </div>
+        <div data-reveal style="border-left:1px solid var(--line);padding:8px 0 40px 30px;position:relative">
+          <span style="position:absolute;left:-5.5px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent)"></span>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Automation platforms · end to end</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(22px,2.6vw,32px);color:var(--text);margin:10px 0 12px">Built two from zero</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(16px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:62ch">Designed and shipped <span style="color:var(--accent)">two production automation platforms</span> on NestJS, React and Electron. Owned the data model, the services and the desktop client. Same hands from the first migration to the first deploy.</p>
+        </div>
+        <div data-reveal style="border-left:1px solid var(--line);padding:8px 0 8px 30px;position:relative">
+          <span style="position:absolute;left:-5.5px;top:14px;width:10px;height:10px;border-radius:50%;background:var(--accent)"></span>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">Across the stack · 6 years</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(22px,2.6vw,32px);color:var(--text);margin:10px 0 12px">Whatever the product needed</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(16px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:62ch">PHP, Symfony and Laravel services, Postgres schemas under real load, CI pipelines, and the interfaces sitting on top of all of it. The constant has been owning a feature from request to render.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" style="max-width:1120px;margin:0 auto;padding:clamp(70px,9vh,130px) clamp(20px,5vw,40px);position:relative">
+      <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px">/ selected work</div>
+      <h2 data-words style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(28px,4.2vw,52px);line-height:1.06;letter-spacing:-0.02em;color:var(--text);max-width:16ch;margin-bottom:48px">A few things I shipped.</h2>
+
+      <a href="/work/valt" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit;margin-bottom:26px">
+        <div style="padding:clamp(28px,4vw,46px);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Featured case study</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(38px,6vw,68px);line-height:0.95;letter-spacing:-0.03em;margin:10px 0 14px">VALT</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--dim);max-width:48ch">Enterprise video capture and evidence management used by 770+ organizations and 50,000+ users. I led it for four years as the lead developer, across Vue and Symfony, down to the Java streaming layer.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:24px">
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">50,000+</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">users</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">770+</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">orgs</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">2,500+</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">components</span></div>
+          </div>
+          <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
+        </div>
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+            <img src="/projects/valt/cover.png" alt="VALT platform interface" loading="lazy" style="display:block;width:100%;height:auto" />
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/massposting" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit;margin-bottom:26px">
+        <div style="position:relative;min-height:240px;overflow:hidden;border-right:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+            <img src="/projects/massposting/accounts.png" alt="Massposting accounts dashboard" loading="lazy" style="display:block;width:100%;height:auto" />
+          </div>
+        </div>
+        <div style="padding:clamp(28px,4vw,46px);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Featured case study</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,5vw,60px);line-height:0.98;letter-spacing:-0.03em;margin:10px 0 14px">Massposting</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--dim);max-width:48ch">A multi-tenant SMM automation platform: cross-posting across ~1,000 accounts, marketplace attribution and analytics, plus AI video generation. I built the whole thing solo, on NestJS and Next.js.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:24px">
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">Solo</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">end to end</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">3</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">marketplaces</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">~1,000</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">accounts</span></div>
+          </div>
+          <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
+        </div>
+      </a>
+
+      <a href="/work/umnogor" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit;margin-bottom:26px">
+        <div style="padding:clamp(28px,4vw,46px);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Case study · Matriks 2021</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(34px,5vw,60px);line-height:0.98;letter-spacing:-0.03em;margin:10px 0 14px">Umnogor</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--dim);max-width:48ch">The web platform for an industrial monitoring (SCADA) system: live mnemonic schemes, operational journals and alarms. I built the React frontend and the Laravel (PHP 8) backend with REST APIs, plus Docker and GitLab CI.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:24px">
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">PHP 8</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">Laravel 8</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">React</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">frontend</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">CI/CD</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">Docker · Git</span></div>
+          </div>
+          <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
+        </div>
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+            <img src="/projects/umnogor/schemes.jpg" alt="Umnogor SCADA schemes dashboard" loading="lazy" style="display:block;width:100%;height:auto" />
+          </div>
+        </div>
+      </a>
+
+      <a href="/work/tkm" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit;margin-bottom:26px">
+        <div style="position:relative;min-height:240px;overflow:hidden;border-right:1px solid var(--line)">
+          <svg viewBox="0 0 600 480" preserveAspectRatio="xMidYMid slice" aria-hidden="true" style="position:absolute;inset:0;width:100%;height:100%;display:block;background:var(--bg)">
+            <defs>
+              <radialGradient id="tkmglow" cx="50%" cy="40%" r="62%">
+                <stop offset="0%" stop-color="oklch(0.74 0.17 55)" stop-opacity="0.24"></stop>
+                <stop offset="72%" stop-color="oklch(0.74 0.17 55)" stop-opacity="0"></stop>
+              </radialGradient>
+            </defs>
+            <rect x="0" y="0" width="600" height="480" fill="url(#tkmglow)"></rect>
+            {Array.from({ length: 20 * 28 }).map((_, i) => {
+              const cols = 28, rows = 20;
+              const c = i % cols, r = Math.floor(i / cols);
+              const x = 30 + c * ((600 - 60) / (cols - 1));
+              const y = 34 + r * ((480 - 68) / (rows - 1));
+              const on = ((r * 7 + c * 11) % 9) === 0;
+              return on
+                ? <circle cx={x} cy={y} r="3.4" fill="var(--accent)"></circle>
+                : <circle cx={x} cy={y} r="2.1" fill="var(--line)"></circle>;
+            })}
+          </svg>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
+            <svg viewBox="0 0 316 395" aria-label="TKM logo" style="width:auto;height:92px;color:var(--text);filter:drop-shadow(0 10px 26px rgba(0,0,0,0.6))">
+              <path d="M157.643 39.6786L280.987 110.875L315.351 91.032L157.643 0L0 91.032L34.356 110.871L157.643 39.6786Z" fill="currentColor" opacity="0.95"></path>
+              <path d="M157.738 212.664H157.674V212.483L0.0303955 121.452V303.515L157.674 394.546V394.727L315.381 303.695V121.632L157.738 212.664Z" fill="currentColor" opacity="0.62"></path>
+            </svg>
+          </div>
+          <div style="position:absolute;left:20px;bottom:18px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase">~2,500 orchestrated sessions</div>
+        </div>
+        <div style="padding:clamp(28px,4vw,46px);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Featured case study</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(38px,6vw,68px);line-height:0.95;letter-spacing:-0.03em;margin:10px 0 14px">TKM</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--dim);max-width:48ch">A distributed browser-automation platform orchestrating ~2,500 sessions across a NestJS API, a React web console and an Electron desktop application. I built all three solo, on one OpenAPI-typed contract.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:24px">
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">~2,500</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">sessions</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">Solo</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">3 apps</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">100%</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">typed</span></div>
+          </div>
+          <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
+        </div>
+      </a>
+
+      <a href="/work/monolizovna" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit">
+        <div style="padding:clamp(28px,4vw,46px);display:flex;flex-direction:column;justify-content:center">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase">Featured case study</div>
+          <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,4.6vw,52px);line-height:0.98;letter-spacing:-0.03em;margin:10px 0 14px">Monolizovna</h3>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--dim);max-width:48ch">A Saint Petersburg photographer's site and the custom CMS behind it — editorial, image-heavy and fast. Astro 5 SSR with Preact islands and a Prisma/SQLite admin I built from scratch, shipped on Docker and GitLab CI.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:18px 32px;margin-top:24px">
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">Solo</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">site + CMS</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">Astro 5</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">SSR · islands</span></div>
+            <div style="display:flex;align-items:baseline;gap:7px"><span class="stat-v" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:var(--text)">~28KB</span><span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim);text-transform:uppercase">HTML gzip</span></div>
+          </div>
+          <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
+        </div>
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 36%, oklch(0.74 0.17 55 / 0.13), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+            <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;background:color-mix(in oklch, var(--surface) 66%, black);border-bottom:1px solid var(--line)">
+              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
+              <span style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim)">monolizovna.ru</span>
+            </div>
+            <img src="/projects/liza/home-hero.png" alt="Monolizovna photographer site home page" loading="lazy" style="display:block;width:100%;height:auto" />
+          </div>
+        </div>
+      </a>
+    </section>
+
+    <section id="ai" style="max-width:1120px;margin:0 auto;padding:clamp(60px,8vh,110px) clamp(20px,5vw,40px);position:relative">
+      <div data-reveal style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(24px,5vw,72px);align-items:start;border-top:1px solid var(--line);padding-top:40px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);padding-top:6px">/ on ai</div>
+        <p style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:clamp(19px,2vw,26px);line-height:1.5;color:var(--text);max-width:54ch">Full disclosure: I designed and built this site with AI in the loop, on purpose. I treat these tools the way I treat any other part of the stack, as leverage I can direct. Knowing how to aim them well is part of being a fullstack engineer now, not a shortcut around it.</p>
+      </div>
+    </section>
+
+    <section id="contact" style="max-width:1120px;margin:0 auto;padding:clamp(80px,12vh,160px) clamp(20px,5vw,40px) clamp(60px,8vh,110px);position:relative">
+      <div data-reveal style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:16px">/ contact</div>
+      <h2 data-words style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(40px,8vw,104px);line-height:0.96;letter-spacing:-0.03em;color:var(--text);margin-bottom:14px">Let's build something.</h2>
+      <p data-reveal style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(17px,1.6vw,22px);color:var(--dim);max-width:48ch;margin-bottom:46px">{profile.availability}</p>
+
+      <div data-reveal style="display:flex;flex-direction:column;border-top:1px solid var(--line)">
+        {profile.contacts.map((c) => (
+          <a
+            href={c.href}
+            class="contact-row"
+            {...(c.href.startsWith("http") ? { target: "_blank", rel: "noopener" } : {})}
+            style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)"
+          >
+            <span class="c-name" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.6vw,34px)">{c.label}</span>
+            <span class="c-tag" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--dim)">{c.tag}</span>
+          </a>
+        ))}
+        <a href="/cv.pdf" download class="contact-row" style="display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)">
+          <span class="c-name" style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(20px,2.6vw,34px)">Download CV</span>
+          <span class="c-tag" style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;color:var(--dim)">PDF ↓</span>
+        </a>
+      </div>
+    </section>
+
+    <footer style="max-width:1120px;margin:0 auto;padding:30px clamp(20px,5vw,40px) 48px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase">
+      <span>Eldar Dadashov</span>
+      <span>Remote worldwide · EU relocation</span>
+      <span>© 2026</span>
+    </footer>
+
+    <div id="cursor-ring" style="position:fixed;left:0;top:0;width:30px;height:30px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:100;opacity:0;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),opacity .25s;mix-blend-mode:screen;display:flex;align-items:center;justify-content:center"><span id="cursor-label" style="opacity:0;transition:opacity .2s;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.12em;color:oklch(0.16 0.015 50);white-space:nowrap">VIEW</span></div>
+    <div id="cursor-dot" style="position:fixed;left:0;top:0;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:101;opacity:0"></div>
+    <div style="position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(125% 95% at 50% 28%, transparent 42%, oklch(0.12 0.02 50 / 0.6) 100%)"></div>
+
+    </div>
+  </div>
+
+  <script is:inline>
+    class Portfolio {
+      mount() {
+        this.root = document.getElementById('ed-portfolio');
+        if (!this.root) return;
+        this.raf = 0;
+        this.disposers = [];
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.coarse = window.matchMedia('(pointer:coarse)').matches;
+
+        this.amber = this.parseColor('#FA8927');
+        this.density = 'Balanced';
+        this.idleOn = true;
+
+        if (reduce) { this.bindAnchorsFallback(); return; }
+
+        this.setupReveals();
+        this.setupWordStagger();
+        this.initCursor();
+        this.initTilt();
+        this.initMagnetic();
+        this.initFeatured();
+        this.initCountUp();
+
+        this.poll(() => window.Lenis, 8000).then(() => this.initScroll()).catch(() => this.bindAnchorsFallback());
+        this.whenReady().then(() => this.initParticles()).catch((e) => console.warn('[hero] static fallback:', e && e.message));
+      }
+
+      poll(test, timeout) {
+        return new Promise((res, rej) => {
+          const t0 = Date.now();
+          const id = setInterval(() => {
+            let v; try { v = test(); } catch (e) { v = null; }
+            if (v) { clearInterval(id); res(v); }
+            else if (Date.now() - t0 > timeout) { clearInterval(id); rej(new Error('timeout')); }
+          }, 50);
+        });
+      }
+      whenReady() {
+        return this.poll(() => window.THREE, 10000).then(() => (document.fonts ? document.fonts.ready : Promise.resolve()));
+      }
+      parseColor(str) {
+        const c = document.createElement('canvas'); c.width = c.height = 1;
+        const x = c.getContext('2d'); x.fillStyle = '#000'; x.fillStyle = str;
+        x.fillRect(0, 0, 1, 1);
+        const d = x.getImageData(0, 0, 1, 1).data;
+        return [d[0] / 255, d[1] / 255, d[2] / 255];
+      }
+
+      setupReveals() {
+        const els = Array.from(this.root.querySelectorAll('[data-reveal]'));
+        els.forEach((el) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(30px)';
+          el.style.clipPath = 'inset(-2px -2px 100% -2px)';
+          el.style.willChange = 'transform, opacity, clip-path';
+          el.style.transition = 'clip-path .95s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1), opacity .7s ease-out';
+        });
+        // The hidden state clips each block to zero height. Chromium folds
+        // clip-path into the area an IntersectionObserver measures, so an IO would
+        // see these as permanently non-intersecting and never reveal them — the
+        // whole page would stay invisible (Firefox ignores clip-path in IO, which
+        // is why it looked fine there). Drive the reveal from scroll geometry via
+        // getBoundingClientRect instead; it is unaffected by clip-path.
+        const reveal = (el) => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+          el.style.clipPath = 'inset(-2px -2px -2px -2px)';
+        };
+        let pending = els.slice();
+        const cleanup = () => {
+          window.removeEventListener('scroll', check);
+          window.removeEventListener('resize', check);
+        };
+        const check = () => {
+          if (!pending.length) return;
+          const h = window.innerHeight;
+          pending = pending.filter((el) => {
+            const r = el.getBoundingClientRect();
+            if (r.top < h * 0.93 && r.bottom > 0) { reveal(el); return false; }
+            return true;
+          });
+          if (!pending.length) cleanup();
+        };
+        window.addEventListener('scroll', check, { passive: true });
+        window.addEventListener('resize', check);
+        this.disposers.push(cleanup);
+        check();
+        requestAnimationFrame(check);
+        setTimeout(check, 300);
+      }
+
+      setupWordStagger() {
+        const heads = Array.from(this.root.querySelectorAll('[data-words]'));
+        heads.forEach((h) => {
+          const words = h.textContent.trim().split(/\s+/);
+          h.textContent = '';
+          h.style.display = 'block';
+          words.forEach((w, i) => {
+            const wrap = document.createElement('span');
+            wrap.style.display = 'inline-block';
+            wrap.style.overflow = 'hidden';
+            wrap.style.verticalAlign = 'top';
+            wrap.style.paddingBottom = '0.08em';
+            const inner = document.createElement('span');
+            inner.style.display = 'inline-block';
+            inner.style.transform = 'translateY(112%)';
+            inner.style.transition = 'transform .85s cubic-bezier(.16,1,.3,1)';
+            inner.style.transitionDelay = (i * 0.06) + 's';
+            inner.textContent = w;
+            wrap.appendChild(inner);
+            h.appendChild(wrap);
+            if (i < words.length - 1) h.appendChild(document.createTextNode(' '));
+          });
+        });
+        const io = new IntersectionObserver((ents) => {
+          ents.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.querySelectorAll('span > span').forEach((s) => { s.style.transform = 'translateY(0)'; });
+              io.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0.3 });
+        heads.forEach((h) => io.observe(h));
+        this.disposers.push(() => io.disconnect());
+      }
+
+      initScroll() {
+        const Lenis = window.Lenis;
+        const lenis = new Lenis({ lerp: 0.085, smoothWheel: true, wheelMultiplier: 1 });
+        this.lenis = lenis;
+        const raf = (t) => { lenis.raf(t); this._sraf = requestAnimationFrame(raf); };
+        this._sraf = requestAnimationFrame(raf);
+        this.disposers.push(() => cancelAnimationFrame(this._sraf));
+        this.bindAnchors((el) => lenis.scrollTo(el, { offset: -10, duration: 1.1 }));
+      }
+      bindAnchorsFallback() {
+        this.bindAnchors((el) => {
+          const top = el.getBoundingClientRect().top + window.scrollY - 10;
+          window.scrollTo({ top, behavior: 'smooth' });
+        });
+      }
+      bindAnchors(go) {
+        this.root.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener('click', (e) => {
+            const id = a.getAttribute('href');
+            if (id.length > 1) {
+              const el = this.root.querySelector(id);
+              if (el) { e.preventDefault(); go(el); }
+            }
+          });
+        });
+      }
+
+      initCursor() {
+        if (this.coarse) return;
+        const dot = this.root.querySelector('#cursor-dot');
+        const ring = this.root.querySelector('#cursor-ring');
+        if (!dot || !ring) return;
+        this.root.style.cursor = 'none';
+        let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+        const onMove = (e) => {
+          mx = e.clientX; my = e.clientY;
+          dot.style.opacity = '1'; ring.style.opacity = '0.55';
+          dot.style.transform = 'translate(' + mx + 'px,' + my + 'px) translate(-50%,-50%)';
+        };
+        window.addEventListener('mousemove', onMove);
+        const loop = () => {
+          rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+          ring.style.transform = 'translate(' + rx + 'px,' + ry + 'px) translate(-50%,-50%)';
+          this._craf = requestAnimationFrame(loop);
+        };
+        loop();
+        this.root.querySelectorAll('a:not(.featured-case),button,[data-magnetic],[data-tilt]').forEach((el) => {
+          el.addEventListener('mouseenter', () => { ring.style.width = '58px'; ring.style.height = '58px'; ring.style.opacity = '0.9'; });
+          el.addEventListener('mouseleave', () => { ring.style.width = '30px'; ring.style.height = '30px'; ring.style.opacity = '0.55'; });
+        });
+        const label = this.root.querySelector('#cursor-label');
+        this.root.querySelectorAll('.featured-case').forEach((el) => {
+          el.addEventListener('mouseenter', () => {
+            ring.style.width = '74px'; ring.style.height = '74px'; ring.style.opacity = '1';
+            ring.style.background = 'var(--accent)'; ring.style.borderColor = 'var(--accent)'; ring.style.mixBlendMode = 'normal';
+            dot.style.opacity = '0';
+            if (label) label.style.opacity = '1';
+          });
+          el.addEventListener('mouseleave', () => {
+            ring.style.width = '30px'; ring.style.height = '30px'; ring.style.opacity = '0.55';
+            ring.style.background = 'transparent'; ring.style.borderColor = 'var(--accent)'; ring.style.mixBlendMode = 'screen';
+            dot.style.opacity = '1';
+            if (label) label.style.opacity = '0';
+          });
+        });
+        this.disposers.push(() => { window.removeEventListener('mousemove', onMove); cancelAnimationFrame(this._craf); });
+      }
+
+      initMagnetic() {
+        if (this.coarse) return;
+        this.root.querySelectorAll('[data-magnetic]').forEach((el) => {
+          el.style.transition = 'transform .45s cubic-bezier(.16,1,.3,1)';
+          el.addEventListener('mousemove', (e) => {
+            const r = el.getBoundingClientRect();
+            const x = e.clientX - (r.left + r.width / 2);
+            const y = e.clientY - (r.top + r.height / 2);
+            el.style.transform = 'translate(' + (x * 0.3) + 'px,' + (y * 0.4) + 'px)';
+          });
+          el.addEventListener('mouseleave', () => { el.style.transform = 'translate(0,0)'; });
+        });
+      }
+
+      initFeatured() {
+        if (this.coarse) return;
+        const EASE = 'cubic-bezier(.16,1,.3,1)';
+        this.root.querySelectorAll('.featured-case').forEach((card) => {
+          const img = card.querySelector('img');
+          card.style.transformStyle = 'preserve-3d';
+          const reset = () => {
+            card.style.transition = 'transform .6s ' + EASE + ', box-shadow .6s ' + EASE;
+            card.style.transform = 'perspective(1300px) rotateX(0deg) rotateY(0deg) translateY(0)';
+            card.style.boxShadow = '';
+            if (img) { img.style.transition = 'transform .6s ' + EASE; img.style.transform = ''; }
+          };
+          card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transition = 'transform .18s ease-out, box-shadow .25s ease-out';
+            card.style.transform = 'perspective(1300px) rotateX(' + (-py * 3.2) + 'deg) rotateY(' + (px * 4.2) + 'deg) translateY(-5px)';
+            card.style.boxShadow = '0 34px 80px -34px rgba(0,0,0,0.75), 0 14px 50px -26px oklch(0.74 0.17 55 / 0.28)';
+            if (img) { img.style.transition = 'transform .18s ease-out'; img.style.transform = 'scale(1.07) translate(' + (-px * 18) + 'px,' + (-py * 18) + 'px)'; }
+          });
+          card.addEventListener('pointerleave', reset);
+        });
+      }
+
+      initCountUp() {
+        const fmt = (n) => n.toLocaleString('en-US');
+        const ease = (x) => 1 - Math.pow(1 - x, 4);
+        const io = new IntersectionObserver((ents) => {
+          ents.forEach((en) => {
+            if (!en.isIntersecting) return;
+            const el = en.target;
+            io.unobserve(el);
+            const m = el.textContent.trim().match(/^(~)?([\d,]+)([+%x])?$/);
+            if (!m) return;
+            const pre = m[1] || '', target = parseInt(m[2].replace(/,/g, ''), 10), suf = m[3] || '';
+            if (!isFinite(target)) return;
+            const dur = 1100, t0 = performance.now();
+            el.textContent = pre + '0' + suf;
+            const step = (now) => {
+              const p = Math.min(1, (now - t0) / dur);
+              el.textContent = pre + fmt(Math.round(target * ease(p))) + suf;
+              if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+          });
+        }, { threshold: 0.6 });
+        this.root.querySelectorAll('.stat-v').forEach((el) => io.observe(el));
+        this.disposers.push(() => io.disconnect());
+      }
+
+      initTilt() {
+        if (this.coarse) return;
+        this.root.querySelectorAll('[data-tilt]').forEach((card) => {
+          const reset = () => {
+            card.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s cubic-bezier(.16,1,.3,1)';
+            card.style.transform = 'rotateX(0deg) rotateY(0deg)';
+            card.style.boxShadow = '0 18px 40px -28px rgba(0,0,0,0.6)';
+            const lay = card.querySelector('[data-tilt-layer]');
+            if (lay) lay.style.transform = 'translateZ(0)';
+          };
+          card.style.transformStyle = 'preserve-3d';
+          card.addEventListener('pointermove', (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            card.style.transition = 'transform .12s linear, box-shadow .2s linear';
+            card.style.transform = 'rotateX(' + (-py * 9) + 'deg) rotateY(' + (px * 11) + 'deg)';
+            card.style.boxShadow = (-px * 26) + 'px ' + (-py * 22 + 24) + 'px 55px -22px rgba(0,0,0,0.75)';
+            const lay = card.querySelector('[data-tilt-layer]');
+            if (lay) lay.style.transform = 'translateZ(45px) translate(' + (-px * 14) + 'px,' + (-py * 14) + 'px)';
+          });
+          card.addEventListener('pointerleave', reset);
+        });
+      }
+
+      initParticles() {
+        const THREE = window.THREE;
+        const hero = this.root.querySelector('#hero');
+        const canvas = this.root.querySelector('#hero-canvas');
+        if (!hero || !canvas) return;
+
+        if (canvas._edStop) { try { canvas._edStop(); } catch (e) {} }
+        let stopped = false;
+
+        const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, preserveDrawingBuffer: true });
+        renderer.setClearColor(0x000000, 0);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+        renderer.setPixelRatio(dpr);
+        this.renderer = renderer;
+
+        let W = window.innerWidth, H = window.innerHeight;
+        renderer.setSize(W, H, false);
+        const cam = new THREE.OrthographicCamera(-W / 2, W / 2, H / 2, -H / 2, -1000, 1000);
+        cam.position.z = 10;
+        const scene = new THREE.Scene();
+
+        const material = new THREE.ShaderMaterial({
+          uniforms: { uPixelRatio: { value: dpr }, uAlpha: { value: 1.0 } },
+          vertexShader: 'attribute float aSize; attribute vec3 aColor; varying vec3 vColor; uniform float uPixelRatio; void main(){ vColor=aColor; vec4 mv=modelViewMatrix*vec4(position,1.0); gl_PointSize=aSize*uPixelRatio; gl_Position=projectionMatrix*mv; }',
+          fragmentShader: 'precision mediump float; varying vec3 vColor; uniform float uAlpha; void main(){ vec2 c=gl_PointCoord-0.5; float d=length(c); float a=smoothstep(0.5,0.0,d); a=pow(a,1.5); if(a<0.01) discard; vec3 col=vColor*(1.0+0.8*pow(a,3.0)); gl_FragColor=vec4(col, a*uAlpha); }',
+          transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending
+        });
+        this.material = material;
+
+        const FORM = 5200, AMB = 1200, N = FORM + AMB;
+        const amber = this.amber, plum = [110 / 255, 48 / 255, 66 / 255];
+        const col = new Float32Array(N * 3), siz = new Float32Array(N);
+        const seed = new Float32Array(N), depth = new Float32Array(N), vel = new Float32Array(N * 2);
+        for (let k = 0; k < N; k++) {
+          seed[k] = Math.random();
+          if (k < FORM) {
+            depth[k] = 1.0;
+            const r = Math.random();
+            let cr, cg, cb, bb;
+            if (r < 0.20) { cr = 1.0; cg = 0.93; cb = 0.78; bb = 1.5 + Math.random() * 0.7; }
+            else if (r < 0.85) { cr = amber[0]; cg = amber[1]; cb = amber[2]; bb = 1.05 + Math.random() * 0.5; }
+            else { cr = plum[0] * 1.5; cg = plum[1] * 1.5; cb = plum[2] * 1.5; bb = 0.85 + Math.random() * 0.4; }
+            col[k * 3] = cr * bb; col[k * 3 + 1] = cg * bb; col[k * 3 + 2] = cb * bb;
+            siz[k] = (r < 0.20 ? 4.2 + Math.random() * 3.6 : 2.2 + Math.random() * 2.2);
+          } else {
+            depth[k] = 0.22 + Math.random() * 0.5;
+            const dim = 0.3 + Math.random() * 0.45;
+            col[k * 3] = amber[0] * dim; col[k * 3 + 1] = amber[1] * dim; col[k * 3 + 2] = amber[2] * dim * 0.85;
+            siz[k] = 1.1 + Math.random() * 1.8;
+          }
+        }
+        // small per-particle jitter so wrap-around targets don't overlap exactly
+        const jit = new Float32Array(N * 2);
+        for (let k = 0; k < N; k++) { jit[k * 2] = (Math.random() - 0.5) * 7; jit[k * 2 + 1] = (Math.random() - 0.5) * 7; }
+        const shuffle = (a) => { const L = a.length / 2; for (let i = L - 1; i > 0; i--) { const j = (Math.random() * (i + 1)) | 0; const px = a[i * 2], py = a[i * 2 + 1]; a[i * 2] = a[j * 2]; a[i * 2 + 1] = a[j * 2 + 1]; a[j * 2] = px; a[j * 2 + 1] = py; } return a; };
+        // 'center' = one motif in the middle (hero wordmark).
+        // 'sides'  = mirror a smaller motif into the left and right gutters, so the
+        //            section content stays clear in the middle.
+        // push side motifs past the content container (~1120 wide) into the gutter,
+        // scaling the gap with the available side room so blocks stay clear
+        const sideOffset = () => { const edge = Math.min(W * 0.5, 560); return edge + Math.max(70, (W * 0.5 - edge) * 0.55); };
+        let offX = sideOffset();
+        const buildTargets = (pool, mode, scale) => {
+          shuffle(pool);
+          const L = Math.max(1, pool.length / 2), arr = new Float32Array(FORM * 2);
+          for (let i = 0; i < FORM; i++) {
+            if (mode === 'center') {
+              const s = i % L;
+              arr[i * 2] = pool[s * 2] + jit[i * 2];
+              arr[i * 2 + 1] = pool[s * 2 + 1] + jit[i * 2 + 1];
+            } else {
+              const side = (i & 1) ? 1 : -1, s = (i >> 1) % L;
+              arr[i * 2] = pool[s * 2] * scale + side * offX + jit[i * 2];
+              arr[i * 2 + 1] = pool[s * 2 + 1] * scale + jit[i * 2 + 1];
+            }
+          }
+          return arr;
+        };
+        // left and right get different (but paired) motifs
+        const buildSides = (poolL, poolR, sl, sr) => {
+          shuffle(poolL); shuffle(poolR);
+          const Ll = Math.max(1, poolL.length / 2), Lr = Math.max(1, poolR.length / 2), arr = new Float32Array(FORM * 2);
+          for (let i = 0; i < FORM; i++) {
+            const s = i >> 1;
+            if (i & 1) { const k = s % Lr; arr[i * 2] = poolR[k * 2] * sr + offX + jit[i * 2]; arr[i * 2 + 1] = poolR[k * 2 + 1] * sr + jit[i * 2 + 1]; }
+            else { const k = s % Ll; arr[i * 2] = poolL[k * 2] * sl - offX + jit[i * 2]; arr[i * 2 + 1] = poolL[k * 2 + 1] * sl + jit[i * 2 + 1]; }
+          }
+          return arr;
+        };
+
+        // one motif per section; particles morph between them as you scroll
+        const sectionKeys = ['hero', 'about', 'skills', 'experience', 'work', 'ai', 'contact'];
+        let forms = [];
+        const ambHome = new Float32Array(AMB * 2);
+        const buildForms = () => {
+          offX = sideOffset();
+          // hero: particles are just a quiet scattered starfield (the name is crisp
+          // solid type, NOT traced by particles); they gather into motifs on scroll
+          const scatter = [];
+          for (let k = 0; k < FORM; k++) scatter.push((Math.random() - 0.5) * W * 1.1, (Math.random() - 0.5) * H * 1.02);
+          forms = [
+            buildTargets(scatter, 'center', 1),
+            buildSides(this.rasterText(['Vue'], W, H, 0.34, 1.0), this.rasterText(['React'], W, H, 0.34, 1.0), 0.46, 0.46),       // about
+            buildSides(this.rasterText(['PHP'], W, H, 0.34, 1.0), this.rasterText(['TS'], W, H, 0.34, 1.0), 0.46, 0.46),          // skills
+            buildSides(this.rasterText(['Laravel'], W, H, 0.34, 1.0), this.rasterText(['Symfony'], W, H, 0.34, 1.0), 0.46, 0.46), // experience
+            buildSides(this.rasterText(['VALT'], W, H, 0.34, 1.0), this.rasterText(['TKM'], W, H, 0.34, 1.0), 0.46, 0.46),        // work
+            buildSides(this.rasterText(['A'], W, H, 0.3, 1.0), this.rasterText(['I'], W, H, 0.3, 1.0), 0.5, 0.5),                 // ai
+            buildSides(this.rasterText(['@'], W, H, 0.42, 1.0), this.rasterText(['HI'], W, H, 0.34, 1.0), 0.52, 0.5),             // contact
+          ];
+          for (let k = 0; k < AMB; k++) { ambHome[k * 2] = (Math.random() - 0.5) * W * 1.15; ambHome[k * 2 + 1] = (Math.random() - 0.5) * H * 1.15; }
+        };
+        buildForms();
+
+        const pos = new Float32Array(N * 3);
+        for (let k = 0; k < N; k++) {
+          if (k < FORM) { const ang = Math.random() * Math.PI * 2, rad = Math.max(W, H) * (0.5 + Math.random() * 0.8); pos[k * 3] = Math.cos(ang) * rad; pos[k * 3 + 1] = Math.sin(ang) * rad; }
+          else { pos[k * 3] = ambHome[(k - FORM) * 2]; pos[k * 3 + 1] = ambHome[(k - FORM) * 2 + 1]; }
+          pos[k * 3 + 2] = 0;
+        }
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('aColor', new THREE.BufferAttribute(col, 3));
+        geo.setAttribute('aSize', new THREE.BufferAttribute(siz, 1));
+        const points = new THREE.Points(geo, material);
+        points.frustumCulled = false;
+        scene.add(points);
+        this.geo = geo;
+
+        // anchor each formation to the scroll position where its section sits centered
+        let anchors = new Array(sectionKeys.length).fill(0);
+        const computeAnchors = () => {
+          const sy = window.scrollY || window.pageYOffset || 0;
+          // furthest the page can scroll — clamp anchors so a short last section
+          // (contact + footer shorter than the viewport) stays reachable, otherwise
+          // its motif never forms and the previous one stays stuck on screen
+          const maxScroll = Math.max(0, document.documentElement.scrollHeight - H);
+          for (let i = 0; i < sectionKeys.length; i++) {
+            const el = this.root.querySelector('#' + sectionKeys[i]);
+            if (!el) { anchors[i] = i ? anchors[i - 1] : 0; continue; }
+            const r = el.getBoundingClientRect();
+            anchors[i] = Math.min(maxScroll, Math.max(0, r.top + sy - H * 0.2));
+          }
+          anchors[0] = 0;
+        };
+        computeAnchors();
+        setTimeout(computeAnchors, 1200);
+        this._recompute = () => { buildForms(); computeAnchors(); };
+
+        const nameEl = this.root.querySelector('#hero-name');
+        if (nameEl) { nameEl.style.transition = 'none'; }
+
+        const mouse = { x: 0, y: 0, active: false };
+        const onMove = (e) => {
+          mouse.x = e.clientX - W / 2;
+          mouse.y = -(e.clientY - H / 2);
+          mouse.active = true;
+        };
+        const onLeave = () => { mouse.active = false; };
+        window.addEventListener('mousemove', onMove);
+        window.addEventListener('mouseout', onLeave);
+
+        const R = Math.min(W, H) * 0.18;
+        const idleAmp = this.idleOn ? 2.0 : 0;
+        const t0 = performance.now();
+        const loop = () => {
+          if (stopped) return;
+          this.raf = requestAnimationFrame(loop);
+          if (document.hidden) return;
+          const time = (performance.now() - t0) / 1000;
+          const pos = this.geo.attributes.position.array;
+          const mx = mouse.x, my = mouse.y, active = mouse.active;
+          const rr = R * R;
+          // which two section motifs are we between, and how far through?
+          const curY = window.scrollY || window.pageYOffset || 0;
+          let f = 0;
+          while (f < anchors.length - 1 && curY >= anchors[f + 1]) f++;
+          let t = 0;
+          if (f < anchors.length - 1) { const span = (anchors[f + 1] - anchors[f]) || 1; t = Math.max(0, Math.min(1, (curY - anchors[f]) / span)); }
+          // hold the motif while its section is in view, morph only near the end of the gap
+          const tm = Math.max(0, Math.min(1, (t - 0.6) / 0.4));
+          const te = tm * tm * (3 - 2 * tm);
+          const A = forms[f], B = forms[Math.min(f + 1, forms.length - 1)];
+          // dim the field once you leave the hero so body text stays readable
+          const heroFade = Math.max(0, Math.min(1, curY / (H * 0.6)));
+          this.material.uniforms.uAlpha.value = 0.42 + heroFade * 0.18;
+          if (nameEl) nameEl.style.opacity = (1 - Math.min(1, heroFade * 1.35)).toFixed(3);
+          const par = active ? 0.03 : 0;
+          for (let i = 0; i < N; i++) {
+            const s = seed[i], dp = depth[i];
+            const pmx = mx * par * dp, pmy = my * par * dp;
+            let tx, ty, repel;
+            if (i < FORM) {
+              // formation particle: morph from motif A -> motif B as you scroll
+              const ax2 = A[i * 2], ay2 = A[i * 2 + 1];
+              const gx = ax2 + (B[i * 2] - ax2) * te;
+              const gy = ay2 + (B[i * 2 + 1] - ay2) * te;
+              tx = gx + Math.sin(time * 0.5 + s * 6.28) * idleAmp + pmx;
+              ty = gy + Math.cos(time * 0.45 + s * 6.28) * idleAmp + pmy;
+              repel = 1;
+            } else {
+              // ambient depth field: slow drift, parallax by depth
+              const hx = ambHome[(i - FORM) * 2], hy = ambHome[(i - FORM) * 2 + 1];
+              tx = hx + Math.sin(time * 0.16 + s * 6.28) * 9.0 + pmx;
+              ty = hy + Math.cos(time * 0.13 + s * 6.28) * 9.0 + pmy;
+              repel = 0;
+            }
+            const px = pos[i * 3], py = pos[i * 3 + 1];
+            const dxt = tx - px, dyt = ty - py;
+            let kk = 0.05 + s * 0.025;
+            // far from target (e.g. a nav-jump skipped several sections) -> snap into
+            // the formation fast; close in -> stay gentle so the morph reads smooth
+            if (dxt * dxt + dyt * dyt > 9000) kk *= 2.4;
+            let ax = dxt * kk, ay = dyt * kk;
+            if (active && repel > 0) {
+              const ddx = px - mx, ddy = py - my, d2 = ddx * ddx + ddy * ddy;
+              if (d2 < rr) {
+                const d = Math.sqrt(d2) || 0.001;
+                const ff = (1 - d / R), fff = ff * ff * 7.0;
+                const ux = ddx / d, uy = ddy / d;
+                ax += ux * fff - uy * fff * 0.5;   // repel + orbital swirl
+                ay += uy * fff + ux * fff * 0.5;
+              }
+            }
+            const vx = (vel[i * 2] + ax) * 0.85, vy = (vel[i * 2 + 1] + ay) * 0.85;
+            vel[i * 2] = vx; vel[i * 2 + 1] = vy;
+            pos[i * 3] = px + vx; pos[i * 3 + 1] = py + vy;
+          }
+          this.geo.attributes.position.needsUpdate = true;
+          renderer.render(scene, cam);
+        };
+        loop();
+
+        let rt;
+        const onResize = () => {
+          clearTimeout(rt);
+          rt = setTimeout(() => {
+            W = window.innerWidth; H = window.innerHeight;
+            renderer.setSize(W, H, false);
+            cam.left = -W / 2; cam.right = W / 2; cam.top = H / 2; cam.bottom = -H / 2;
+            cam.updateProjectionMatrix();
+            this._recompute();
+          }, 220);
+        };
+        window.addEventListener('resize', onResize);
+
+        const stop = () => {
+          stopped = true;
+          cancelAnimationFrame(this.raf);
+          window.removeEventListener('mousemove', onMove);
+          window.removeEventListener('mouseout', onLeave);
+          window.removeEventListener('resize', onResize);
+          try { points.geometry.dispose(); } catch (e) {}
+          try { material.dispose(); } catch (e) {}
+          try { renderer.dispose(); } catch (e) {}
+          if (canvas._edStop === stop) canvas._edStop = null;
+        };
+        canvas._edStop = stop;
+        this._stop = stop;
+        this.disposers.push(stop);
+      }
+
+      // Sample the wordmark at the real <h1> box so the particle aura lines up
+      // exactly with the crisp solid type sitting on top of it.
+      heroNamePool(W, H) {
+        const nameEl = this.root.querySelector('#hero-name');
+        const c = document.createElement('canvas'); c.width = W; c.height = H;
+        const x = c.getContext('2d');
+        x.clearRect(0, 0, W, H);
+        x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+        try { x.letterSpacing = '-0.035em'; } catch (e) {}
+        const setFont = (s) => { x.font = '700 ' + s + 'px "Bricolage Grotesque", sans-serif'; };
+        let cx = W / 2, cy = H * 0.44, fs;
+        if (nameEl) {
+          const nr = nameEl.getBoundingClientRect();
+          cx = (nr.left + nr.right) / 2; cy = (nr.top + nr.bottom) / 2;
+          fs = parseFloat(getComputedStyle(nameEl).fontSize) || Math.min(H * 0.22, W * 0.16);
+        } else { fs = Math.min(H * 0.22, W * 0.16); }
+        setFont(fs);
+        const maxW = W * 0.86, w = x.measureText('DADASHOV').width;
+        if (w > maxW) { fs = fs * maxW / w; setFont(fs); }
+        const lh = fs * 0.9;
+        x.fillText('ELDAR', cx, cy - lh * 0.5);
+        x.fillText('DADASHOV', cx, cy + lh * 0.5);
+        const data = x.getImageData(0, 0, W, H).data;
+        const gap = Math.max(3, Math.round(W / 340));
+        const out = [];
+        for (let yy = 0; yy < H; yy += gap)
+          for (let xx = 0; xx < W; xx += gap)
+            if (data[(yy * W + xx) * 4 + 3] > 120) out.push(xx - W / 2, H / 2 - yy);
+        return out;
+      }
+
+      // Rasterize centered text into a pool of (x,y) points, centered & y-up.
+      rasterText(lines, W, H, widthFrac, lhFrac) {
+        const c = document.createElement('canvas'); c.width = W; c.height = H;
+        const x = c.getContext('2d');
+        x.clearRect(0, 0, W, H);
+        x.fillStyle = '#fff'; x.textAlign = 'center'; x.textBaseline = 'middle';
+        try { x.letterSpacing = '-0.03em'; } catch (e) {}
+        const setFont = (s) => { x.font = '700 ' + s + 'px "Bricolage Grotesque", sans-serif'; };
+        const cx = W / 2, cy = H * 0.44;
+        let fs = Math.min(H * 0.34, W * 0.2);
+        setFont(fs);
+        let widest = 1;
+        for (const ln of lines) widest = Math.max(widest, x.measureText(ln).width);
+        const maxW = W * widthFrac;
+        if (widest > maxW) { fs = fs * maxW / widest; setFont(fs); }
+        const lh = fs * lhFrac;
+        const start = cy - lh * (lines.length - 1) / 2;
+        for (let i = 0; i < lines.length; i++) x.fillText(lines[i], cx, start + i * lh);
+        const data = x.getImageData(0, 0, W, H).data;
+        const gap = Math.max(3, Math.round(W / 320));
+        const out = [];
+        for (let yy = 0; yy < H; yy += gap)
+          for (let xx = 0; xx < W; xx += gap)
+            if (data[(yy * W + xx) * 4 + 3] > 120) out.push(xx - W / 2, H / 2 - yy);
+        return out;
+      }
+
+      // Three clearly separated layers, narrowing upward — "the stack".
+      genStack(W, H) {
+        const out = [];
+        const bw = Math.min(W * 0.4, 520), bh = Math.min(H * 0.072, 62), gap = bh * 2.0;
+        const nb = 3, total = (nb - 1) * gap, step = Math.max(4, bw / 120);
+        for (let b = 0; b < nb; b++) {
+          const yc = total / 2 - b * gap, w = bw * (1 - b * 0.16);
+          for (let yy = -bh / 2; yy <= bh / 2; yy += 4)
+            for (let xx = -w / 2; xx <= w / 2; xx += step) out.push(xx, yc + yy);
+        }
+        return out;
+      }
+
+      // Rising bar chart — "work that moved a number".
+      genChart(W, H) {
+        const out = [];
+        const nb = 7, bw = Math.min(W * 0.058, 64), gap = bw * 1.7;
+        const totalW = (nb - 1) * gap, baseY = -H * 0.17, step = Math.max(4, bw / 12);
+        for (let b = 0; b < nb; b++) {
+          const xc = -totalW / 2 + b * gap;
+          const hb = H * 0.05 + (b / (nb - 1)) * H * 0.32;
+          for (let yy = 0; yy <= hb; yy += 5)
+            for (let xx = -bw / 2; xx <= bw / 2; xx += step) out.push(xc + xx, baseY + yy);
+        }
+        return out;
+      }
+
+      // A rising growth curve — paired with the chart on the experience block.
+      genTrend(W, H) {
+        const out = [];
+        const w = Math.min(W * 0.3, 420), h = Math.min(H * 0.3, 280), n = 80;
+        for (let i = 0; i < n; i++) {
+          const t = i / (n - 1), x = -w / 2 + t * w, y = -h / 2 + t * t * h;
+          for (let k = -2; k <= 2; k++) out.push(x, y + k * 5);
+        }
+        return out;
+      }
+
+      // Grid of cards — "selected work".
+      genGrid(W, H) {
+        const out = [];
+        const cols = 3, rows = 2, cw = Math.min(W * 0.15, 200), ch = cw * 0.64;
+        const gx = cw * 1.32, gy = ch * 1.5, tw = (cols - 1) * gx, th = (rows - 1) * gy;
+        const sx = Math.max(5, cw / 26), sy = Math.max(5, ch / 18);
+        for (let r = 0; r < rows; r++)
+          for (let ci = 0; ci < cols; ci++) {
+            const xc = -tw / 2 + ci * gx, yc = th / 2 - r * gy;
+            for (let yy = -ch / 2; yy <= ch / 2; yy += sy)
+              for (let xx = -cw / 2; xx <= cw / 2; xx += sx) out.push(xc + xx, yc + yy);
+          }
+        return out;
+      }
+    }
+
+    const __start = () => { try { new Portfolio().mount(); } catch (e) { console.warn(e); } };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', __start);
+    else __start();
+  </script>
 </Base>

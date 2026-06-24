@@ -1,0 +1,135 @@
+---
+import Base from "../../layouts/Base.astro";
+import { massposting as cs } from "../../data/content";
+
+const creativeWork = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: cs.name,
+  headline: cs.tagline,
+  description: cs.summary,
+  url: new URL(`/work/${cs.slug}`, Astro.site).href,
+  keywords: cs.stack.join(", "),
+  author: { "@type": "Person", name: "Eldar Dadashov" },
+};
+---
+
+<Base title={`${cs.name} — case study — Eldar Dadashov`} description={cs.tagline} ogType="article" jsonLd={[creativeWork]}>
+  <div style="--bg:oklch(0.17 0.015 50);--surface:oklch(0.22 0.02 50);--text:oklch(0.93 0.012 85);--dim:oklch(0.68 0.015 75);--accent:oklch(0.74 0.17 55);--line:oklch(0.32 0.02 50);background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
+
+    <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,40px);font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;background:color-mix(in oklch, var(--bg) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)">
+      <a href="/" class="nav-link" style="color:var(--dim)">← BACK</a>
+      <span style="color:var(--accent)">{cs.name} / CASE STUDY</span>
+    </header>
+
+    <section style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(44px,7vh,90px) clamp(20px,5vw,40px) clamp(30px,5vh,56px);overflow:hidden">
+      <div aria-hidden="true" style="position:absolute;top:-8%;right:-6%;width:62%;height:540px;background:radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.18), transparent 70%);filter:blur(18px);pointer-events:none;z-index:0"></div>
+
+      <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(34px,5vw,62px);align-items:center">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.12em;color:var(--accent);text-transform:uppercase">{cs.kicker}</div>
+          <h1 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(40px,7vw,90px);line-height:0.92;letter-spacing:-0.035em;margin:16px 0 16px;overflow-wrap:break-word">{cs.name}</h1>
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:500;font-size:clamp(21px,3vw,34px);line-height:1.12;letter-spacing:-0.02em;color:var(--text);max-width:20ch">{cs.tagline}</p>
+          <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(16px,1.4vw,19px);line-height:1.62;color:var(--dim);max-width:56ch;margin-top:22px">{cs.summary}</p>
+        </div>
+
+        <div style="position:relative">
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 44px 90px -46px rgba(0,0,0,0.85)">
+            <div style="display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line)">
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block"></span>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;color:var(--dim);margin-left:8px">massposting · accounts</span>
+            </div>
+            <img src="/projects/massposting/accounts.png" alt="Massposting account management dashboard" loading="eager" style="width:100%;height:auto;display:block" />
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:clamp(28px,6vw,72px);margin-top:clamp(40px,6vh,64px);padding-top:32px;border-top:1px solid var(--line)">
+        {cs.stats.map((s) => (
+          <div>
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:clamp(30px,4.5vw,52px);line-height:1;letter-spacing:-0.02em;color:var(--text)">{s.value}</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.08em;color:var(--dim);text-transform:uppercase;margin-top:8px">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+      <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:10px;margin-top:30px">
+        {cs.stack.map((t) => (
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12.5px;color:var(--text);background:var(--surface);border:1px solid var(--line);padding:6px 12px;border-radius:4px">{t}</span>
+        ))}
+      </div>
+    </section>
+
+    <section style="max-width:1080px;margin:0 auto;padding:clamp(70px,11vh,140px) clamp(20px,5vw,40px) clamp(50px,7vh,90px)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px">/ my contribution</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(30px,4.6vw,58px);line-height:1.04;letter-spacing:-0.02em;max-width:18ch;margin-bottom:50px">What I built, solo.</h2>
+
+      <div style="display:flex;flex-direction:column">
+        {cs.contributions.map((group) => (
+          <div style="display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:clamp(18px,4vw,56px);align-items:start;border-top:1px solid var(--line);padding:clamp(30px,4.5vh,48px) 0">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.1em;color:var(--accent);text-transform:uppercase;padding-top:6px">{group.theme}</div>
+            <div style="display:flex;flex-direction:column;gap:clamp(26px,3.5vh,38px)">
+              {group.items.map((item) => (
+                <div>
+                  <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(19px,2.3vw,26px);line-height:1.18;color:var(--text);max-width:30ch">{item.title}</h3>
+                  <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15.5px,1.4vw,18px);line-height:1.6;color:var(--dim);max-width:64ch;margin-top:10px">{item.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section style="max-width:1080px;margin:0 auto;padding:clamp(40px,6vh,80px) clamp(20px,5vw,40px)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:14px">/ the product</div>
+      <h2 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(28px,4vw,48px);line-height:1.06;letter-spacing:-0.02em;max-width:20ch;margin-bottom:18px">What Massposting does.</h2>
+      <p style="font-family:'Hanken Grotesk',sans-serif;font-size:clamp(15px,1.3vw,18px);color:var(--dim);margin-bottom:42px">Used by {cs.sectors.join(", ")}.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden">
+        {cs.product.map((f) => (
+          <div style="background:var(--bg);padding:28px 26px 32px">
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:clamp(18px,1.9vw,22px);line-height:1.2;color:var(--text);max-width:22ch">{f.title}</h3>
+            <p style="font-family:'Hanken Grotesk',sans-serif;font-size:15.5px;line-height:1.55;color:var(--dim);margin-top:12px">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section style="max-width:1280px;margin:0 auto;padding:clamp(60px,9vh,120px) clamp(20px,5vw,40px)">
+      <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.14em;color:var(--accent);margin-bottom:34px">/ screens</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:22px">
+        {cs.gallery.map((g) => (
+          <figure style="margin:0">
+            <img src={g.src} alt={g.alt} loading="lazy" style="width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:6px;background:var(--surface)" />
+            <figcaption style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.06em;color:var(--dim);text-transform:uppercase;margin-top:12px">{g.caption}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section style="max-width:1080px;margin:0 auto;padding:clamp(50px,7vh,90px) clamp(20px,5vw,40px) clamp(80px,12vh,140px)">
+      {cs.note && (
+        <p style="font-family:'Hanken Grotesk',sans-serif;font-size:14px;line-height:1.6;color:var(--dim);max-width:60ch;margin-bottom:22px">{cs.note}</p>
+      )}
+      <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center">
+        {cs.link && (
+          <a href={cs.link.href} target="_blank" rel="noopener" data-magnetic class="btn-outline" style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:15px;color:var(--text);padding:14px 24px;border-radius:4px;border:1px solid var(--line)">{cs.link.label} ↗</a>
+        )}
+        {cs.source && (
+          <a href={cs.source.href} target="_blank" rel="noopener" data-magnetic class="btn-outline" style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:15px;color:var(--dim);padding:14px 24px;border-radius:4px;border:1px solid var(--line)">{cs.source.label} ↗</a>
+        )}
+        <a href="/#work" class="nav-link" style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;color:var(--accent);margin-left:auto">← ALL WORK</a>
+      </div>
+    </section>
+
+    <footer style="max-width:1280px;margin:0 auto;padding:30px clamp(20px,5vw,40px) 48px;display:flex;flex-wrap:wrap;gap:14px;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase;border-top:1px solid var(--line)">
+      <span>Eldar Dadashov</span>
+      <span>Massposting · solo build</span>
+      <span>© 2026</span>
+    </footer>
+
+  </div>
+</Base>
