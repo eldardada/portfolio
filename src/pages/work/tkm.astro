@@ -53,20 +53,23 @@ const antidetect = [
 ];
 ---
 
-<Base title={`${cs.name} — case study — Eldar Dadashov`} description={cs.tagline} ogType="article" jsonLd={[creativeWork]}>
-  <div style="--bg:oklch(0.17 0.015 50);--surface:oklch(0.22 0.02 50);--text:oklch(0.93 0.012 85);--dim:oklch(0.68 0.015 75);--accent:oklch(0.74 0.17 55);--line:oklch(0.32 0.02 50);background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
+<Base title={`${cs.name} · case study · Eldar Dadashov`} description={cs.tagline} ogType="article" jsonLd={[creativeWork]}>
+  <div style="background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
 
     <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,40px);font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;background:color-mix(in oklch, var(--bg) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)">
       <a href="/" class="nav-link" style="color:var(--dim)">← BACK</a>
-      <span style="color:var(--accent)">{cs.name} / CASE STUDY</span>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="color:var(--accent)">{cs.name} / CASE STUDY</span>
+        <button type="button" data-theme-toggle class="theme-toggle" aria-label="Switch theme"></button>
+      </div>
     </header>
 
     <section style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(44px,7vh,90px) clamp(20px,5vw,40px) clamp(30px,5vh,56px);overflow:hidden">
-      <div aria-hidden="true" style="position:absolute;top:-8%;right:-6%;width:62%;height:540px;background:radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.18), transparent 70%);filter:blur(18px);pointer-events:none;z-index:0"></div>
+      <div aria-hidden="true" style="position:absolute;top:-8%;right:-6%;width:62%;height:540px;background:radial-gradient(closest-side, var(--glow), transparent 70%);filter:blur(18px);pointer-events:none;z-index:0"></div>
 
       <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(34px,5vw,62px);align-items:center">
         <div>
-          <svg viewBox="0 0 316 395" aria-label="TKM logo" style="width:auto;height:48px;color:var(--text);display:block;margin-bottom:22px;filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5))">
+          <svg viewBox="0 0 316 395" aria-label="TKM logo" style="width:auto;height:48px;color:var(--text);display:block;margin-bottom:22px;filter:drop-shadow(0 6px 16px var(--logo-shadow))">
             <path d="M157.643 39.6786L280.987 110.875L315.351 91.032L157.643 0L0 91.032L34.356 110.871L157.643 39.6786Z" fill="currentColor" opacity="0.95"></path>
             <path d="M157.738 212.664H157.674V212.483L0.0303955 121.452V303.515L157.674 394.546V394.727L315.381 303.695V121.632L157.738 212.664Z" fill="currentColor" opacity="0.62"></path>
           </svg>
@@ -78,7 +81,7 @@ const antidetect = [
 
         <!-- Architecture diagram (no screenshots: this project shows no real UI or data) -->
         <div style="position:relative">
-          <svg class="arch" viewBox="0 0 560 620" role="img" aria-label="Architecture: a web console and many desktop applications talk to a NestJS API over one OpenAPI-typed contract, backed by PostgreSQL and Redis." style="width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 30px 50px rgba(0,0,0,0.45))">
+          <svg class="arch" viewBox="0 0 560 620" role="img" aria-label="Architecture: a web console and many desktop applications talk to a NestJS API over one OpenAPI-typed contract, backed by PostgreSQL and Redis." style="width:100%;height:auto;display:block;overflow:visible;filter:drop-shadow(0 30px 50px var(--shadow-color))">
             <!-- connectors -->
             <g fill="none" stroke="var(--accent)" stroke-width="1.6" opacity="0.6">
               <path class="wire" d="M140,116 L140,176" />

@@ -14,16 +14,19 @@ const creativeWork = {
 };
 ---
 
-<Base title={`${valt.name} — case study — Eldar Dadashov`} description={valt.tagline} ogType="article" jsonLd={[creativeWork]}>
-  <div style="--bg:oklch(0.17 0.015 50);--surface:oklch(0.22 0.02 50);--text:oklch(0.93 0.012 85);--dim:oklch(0.68 0.015 75);--accent:oklch(0.74 0.17 55);--line:oklch(0.32 0.02 50);background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
+<Base title={`${valt.name} · case study · Eldar Dadashov`} description={valt.tagline} ogType="article" jsonLd={[creativeWork]}>
+  <div style="background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
 
     <header style="position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(20px,5vw,40px);font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.08em;background:color-mix(in oklch, var(--bg) 86%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)">
       <a href="/" class="nav-link" style="color:var(--dim)">← BACK</a>
-      <span style="color:var(--accent)">{valt.name} / CASE STUDY</span>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span style="color:var(--accent)">{valt.name} / CASE STUDY</span>
+        <button type="button" data-theme-toggle class="theme-toggle" aria-label="Switch theme"></button>
+      </div>
     </header>
 
     <section style="position:relative;max-width:1240px;margin:0 auto;padding:clamp(44px,7vh,90px) clamp(20px,5vw,40px) clamp(30px,5vh,56px);overflow:hidden">
-      <div aria-hidden="true" style="position:absolute;top:-8%;right:-6%;width:62%;height:540px;background:radial-gradient(closest-side, oklch(0.74 0.17 55 / 0.18), transparent 70%);filter:blur(18px);pointer-events:none;z-index:0"></div>
+      <div aria-hidden="true" style="position:absolute;top:-8%;right:-6%;width:62%;height:540px;background:radial-gradient(closest-side, var(--glow), transparent 70%);filter:blur(18px);pointer-events:none;z-index:0"></div>
 
       <div style="position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:clamp(34px,5vw,62px);align-items:center">
         <div>
@@ -34,7 +37,7 @@ const creativeWork = {
         </div>
 
         <div style="position:relative">
-          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 44px 90px -46px rgba(0,0,0,0.85)">
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 44px 90px -46px var(--shadow-strong)">
             <div style="display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--line)">
               <span style="width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block"></span>
               <span style="width:9px;height:9px;border-radius:50%;background:var(--line);display:inline-block"></span>

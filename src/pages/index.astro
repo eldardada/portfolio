@@ -5,8 +5,8 @@ import { profile } from "../data/content";
 const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in production`;
 ---
 
-<Base title={`${profile.name} — ${profile.role}`}>
-  <div id="ed-portfolio" style="--bg:oklch(0.17 0.015 50);--surface:oklch(0.22 0.02 50);--text:oklch(0.93 0.012 85);--dim:oklch(0.68 0.015 75);--accent:oklch(0.74 0.17 55);--plum:oklch(0.30 0.06 350);--line:oklch(0.32 0.02 50);background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
+<Base title={`${profile.name} · ${profile.role}`}>
+  <div id="ed-portfolio" style="background:var(--bg);color:var(--text);font-family:'Hanken Grotesk',sans-serif;min-height:100vh;position:relative;overflow-x:hidden">
     <canvas id="hero-canvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none"></canvas>
     <div style="position:relative;z-index:1">
 
@@ -19,6 +19,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
         <a href="#skills" data-magnetic class="nav-link">SKILLS</a>
         <a href="#work" data-magnetic class="nav-link">WORK</a>
         <a href="#contact" data-magnetic class="nav-link">CONTACT</a>
+        <button type="button" data-theme-toggle data-magnetic class="theme-toggle" aria-label="Switch theme"></button>
       </div>
     </nav>
 
@@ -29,7 +30,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
         <p style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:clamp(18px,2vw,24px);line-height:1.45;color:var(--text);max-width:30ch">{profile.tagline}</p>
         <div style="font-family:'JetBrains Mono',monospace;font-size:12.5px;letter-spacing:.06em;color:var(--dim);margin-top:20px;max-width:46ch;line-height:1.9">{profile.heroStack}</div>
         <div style="display:flex;gap:14px;margin-top:34px;flex-wrap:wrap;justify-content:center">
-          <a href="#contact" data-magnetic class="btn-primary" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;background:var(--accent);color:oklch(0.16 0.015 50);padding:15px 26px;border-radius:3px;white-space:nowrap">Get in touch</a>
+          <a href="#contact" data-magnetic class="btn-primary" style="font-family:'Hanken Grotesk',sans-serif;font-weight:600;font-size:15px;background:var(--accent);color:var(--on-accent);padding:15px 26px;border-radius:3px;white-space:nowrap">Get in touch</a>
           <a href="/cv.pdf" download data-magnetic class="btn-outline" style="font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:15px;color:var(--text);padding:15px 26px;border-radius:3px;border:1px solid var(--line);white-space:nowrap">Download CV</a>
         </div>
       </div>
@@ -144,18 +145,18 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
           </div>
           <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
         </div>
-        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
-          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
-          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:var(--img-well);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, var(--glow), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px var(--shadow-color)">
             <img src="/projects/valt/cover.png" alt="VALT platform interface" loading="lazy" style="display:block;width:100%;height:auto" />
           </div>
         </div>
       </a>
 
       <a href="/work/massposting" data-reveal class="featured-case" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));background:var(--surface);border-radius:7px;overflow:hidden;color:inherit;margin-bottom:26px">
-        <div style="position:relative;min-height:240px;overflow:hidden;border-right:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
-          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
-          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+        <div style="position:relative;min-height:240px;overflow:hidden;border-right:1px solid var(--line);background:var(--img-well);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, var(--glow), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px var(--shadow-color)">
             <img src="/projects/massposting/accounts.png" alt="Massposting accounts dashboard" loading="lazy" style="display:block;width:100%;height:auto" />
           </div>
         </div>
@@ -184,9 +185,9 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
           </div>
           <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
         </div>
-        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
-          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, oklch(0.74 0.17 55 / 0.12), transparent 70%);pointer-events:none"></div>
-          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:var(--img-well);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 38%, var(--glow), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px var(--shadow-color)">
             <img src="/projects/umnogor/schemes.jpg" alt="Umnogor SCADA schemes dashboard" loading="lazy" style="display:block;width:100%;height:auto" />
           </div>
         </div>
@@ -214,7 +215,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
             })}
           </svg>
           <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none">
-            <svg viewBox="0 0 316 395" aria-label="TKM logo" style="width:auto;height:92px;color:var(--text);filter:drop-shadow(0 10px 26px rgba(0,0,0,0.6))">
+            <svg viewBox="0 0 316 395" aria-label="TKM logo" style="width:auto;height:92px;color:var(--text);filter:drop-shadow(0 10px 26px var(--logo-shadow))">
               <path d="M157.643 39.6786L280.987 110.875L315.351 91.032L157.643 0L0 91.032L34.356 110.871L157.643 39.6786Z" fill="currentColor" opacity="0.95"></path>
               <path d="M157.738 212.664H157.674V212.483L0.0303955 121.452V303.515L157.674 394.546V394.727L315.381 303.695V121.632L157.738 212.664Z" fill="currentColor" opacity="0.62"></path>
             </svg>
@@ -246,13 +247,13 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
           </div>
           <div class="case-cta" style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.06em;color:var(--text);margin-top:28px">Read the case study →</div>
         </div>
-        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:color-mix(in oklch, var(--surface) 78%, black);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
-          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 36%, oklch(0.74 0.17 55 / 0.13), transparent 70%);pointer-events:none"></div>
-          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px rgba(0,0,0,0.5)">
-            <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;background:color-mix(in oklch, var(--surface) 66%, black);border-bottom:1px solid var(--line)">
-              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
-              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
-              <span style="width:9px;height:9px;border-radius:50%;background:oklch(0.5 0.02 50)"></span>
+        <div style="position:relative;min-height:240px;overflow:hidden;border-left:1px solid var(--line);background:var(--img-well);display:flex;align-items:center;justify-content:center;padding:clamp(22px,3.5vw,44px)">
+          <div aria-hidden="true" style="position:absolute;inset:0;background:radial-gradient(62% 58% at 50% 36%, var(--glow), transparent 70%);pointer-events:none"></div>
+          <div style="position:relative;width:100%;max-width:560px;border:1px solid var(--line);border-radius:9px;overflow:hidden;box-shadow:0 26px 46px var(--shadow-color)">
+            <div style="display:flex;align-items:center;gap:7px;padding:9px 13px;background:var(--chrome);border-bottom:1px solid var(--line)">
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--dot)"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--dot)"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:var(--dot)"></span>
               <span style="margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--dim)">monolizovna.ru</span>
             </div>
             <img src="/projects/liza/home-hero.png" alt="Monolizovna photographer site home page" loading="lazy" style="display:block;width:100%;height:auto" />
@@ -298,9 +299,9 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
       <span>© 2026</span>
     </footer>
 
-    <div id="cursor-ring" style="position:fixed;left:0;top:0;width:30px;height:30px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:100;opacity:0;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),opacity .25s;mix-blend-mode:screen;display:flex;align-items:center;justify-content:center"><span id="cursor-label" style="opacity:0;transition:opacity .2s;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.12em;color:oklch(0.16 0.015 50);white-space:nowrap">VIEW</span></div>
+    <div id="cursor-ring" style="position:fixed;left:0;top:0;width:30px;height:30px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:100;opacity:0;transition:width .25s cubic-bezier(.16,1,.3,1),height .25s cubic-bezier(.16,1,.3,1),opacity .25s;mix-blend-mode:var(--ring-blend);display:flex;align-items:center;justify-content:center"><span id="cursor-label" style="opacity:0;transition:opacity .2s;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.12em;color:var(--on-accent);white-space:nowrap">VIEW</span></div>
     <div id="cursor-dot" style="position:fixed;left:0;top:0;width:6px;height:6px;background:var(--accent);border-radius:50%;pointer-events:none;z-index:101;opacity:0"></div>
-    <div style="position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(125% 95% at 50% 28%, transparent 42%, oklch(0.12 0.02 50 / 0.6) 100%)"></div>
+    <div style="position:fixed;inset:0;pointer-events:none;z-index:40;background:radial-gradient(125% 95% at 50% 28%, transparent 42%, var(--vignette) 100%)"></div>
 
     </div>
   </div>
@@ -492,7 +493,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
           });
           el.addEventListener('mouseleave', () => {
             ring.style.width = '30px'; ring.style.height = '30px'; ring.style.opacity = '0.55';
-            ring.style.background = 'transparent'; ring.style.borderColor = 'var(--accent)'; ring.style.mixBlendMode = 'screen';
+            ring.style.background = 'transparent'; ring.style.borderColor = 'var(--accent)'; ring.style.mixBlendMode = 'var(--ring-blend)';
             dot.style.opacity = '1';
             if (label) label.style.opacity = '0';
           });
@@ -532,7 +533,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
             const py = (e.clientY - r.top) / r.height - 0.5;
             card.style.transition = 'transform .18s ease-out, box-shadow .25s ease-out';
             card.style.transform = 'perspective(1300px) rotateX(' + (-py * 3.2) + 'deg) rotateY(' + (px * 4.2) + 'deg) translateY(-5px)';
-            card.style.boxShadow = '0 34px 80px -34px rgba(0,0,0,0.75), 0 14px 50px -26px oklch(0.74 0.17 55 / 0.28)';
+            card.style.boxShadow = '0 34px 80px -34px var(--shadow-card), 0 14px 50px -26px var(--glow-strong)';
             if (img) { img.style.transition = 'transform .18s ease-out'; img.style.transform = 'scale(1.07) translate(' + (-px * 18) + 'px,' + (-py * 18) + 'px)'; }
           });
           card.addEventListener('pointerleave', reset);
@@ -571,7 +572,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
           const reset = () => {
             card.style.transition = 'transform .6s cubic-bezier(.16,1,.3,1), box-shadow .6s cubic-bezier(.16,1,.3,1)';
             card.style.transform = 'rotateX(0deg) rotateY(0deg)';
-            card.style.boxShadow = '0 18px 40px -28px rgba(0,0,0,0.6)';
+            card.style.boxShadow = '0 18px 40px -28px var(--shadow-color)';
             const lay = card.querySelector('[data-tilt-layer]');
             if (lay) lay.style.transform = 'translateZ(0)';
           };
@@ -582,7 +583,7 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
             const py = (e.clientY - r.top) / r.height - 0.5;
             card.style.transition = 'transform .12s linear, box-shadow .2s linear';
             card.style.transform = 'rotateX(' + (-py * 9) + 'deg) rotateY(' + (px * 11) + 'deg)';
-            card.style.boxShadow = (-px * 26) + 'px ' + (-py * 22 + 24) + 'px 55px -22px rgba(0,0,0,0.75)';
+            card.style.boxShadow = (-px * 26) + 'px ' + (-py * 22 + 24) + 'px 55px -22px var(--shadow-card)';
             const lay = card.querySelector('[data-tilt-layer]');
             if (lay) lay.style.transform = 'translateZ(45px) translate(' + (-px * 14) + 'px,' + (-py * 14) + 'px)';
           });
@@ -612,9 +613,11 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
         const scene = new THREE.Scene();
 
         const material = new THREE.ShaderMaterial({
-          uniforms: { uPixelRatio: { value: dpr }, uAlpha: { value: 1.0 } },
+          uniforms: { uPixelRatio: { value: dpr }, uAlpha: { value: 1.0 }, uLight: { value: 0.0 } },
           vertexShader: 'attribute float aSize; attribute vec3 aColor; varying vec3 vColor; uniform float uPixelRatio; void main(){ vColor=aColor; vec4 mv=modelViewMatrix*vec4(position,1.0); gl_PointSize=aSize*uPixelRatio; gl_Position=projectionMatrix*mv; }',
-          fragmentShader: 'precision mediump float; varying vec3 vColor; uniform float uAlpha; void main(){ vec2 c=gl_PointCoord-0.5; float d=length(c); float a=smoothstep(0.5,0.0,d); a=pow(a,1.5); if(a<0.01) discard; vec3 col=vColor*(1.0+0.8*pow(a,3.0)); gl_FragColor=vec4(col, a*uAlpha); }',
+          // uLight=1 (light theme) drops the additive core-glow and lifts alpha so
+          // the warm ink particles read against a bright background under normal blending.
+          fragmentShader: 'precision mediump float; varying vec3 vColor; uniform float uAlpha; uniform float uLight; void main(){ vec2 c=gl_PointCoord-0.5; float d=length(c); float a=smoothstep(0.5,0.0,d); a=pow(a,1.5); if(a<0.01) discard; vec3 col=vColor*(1.0+(1.0-uLight)*0.8*pow(a,3.0)); float alpha=a*uAlpha*(1.0+uLight*0.55); gl_FragColor=vec4(col, alpha); }',
           transparent: true, depthTest: false, depthWrite: false, blending: THREE.AdditiveBlending
         });
         this.material = material;
@@ -623,24 +626,51 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
         const amber = this.amber, plum = [110 / 255, 48 / 255, 66 / 255];
         const col = new Float32Array(N * 3), siz = new Float32Array(N);
         const seed = new Float32Array(N), depth = new Float32Array(N), vel = new Float32Array(N * 2);
+        // Per-particle class/brightness randoms are kept so a live theme swap
+        // recolours the field in place instead of reshuffling it.
+        const rClass = new Float32Array(N), bright = new Float32Array(N);
         for (let k = 0; k < N; k++) {
           seed[k] = Math.random();
+          rClass[k] = Math.random();
+          bright[k] = Math.random();
           if (k < FORM) {
             depth[k] = 1.0;
-            const r = Math.random();
-            let cr, cg, cb, bb;
-            if (r < 0.20) { cr = 1.0; cg = 0.93; cb = 0.78; bb = 1.5 + Math.random() * 0.7; }
-            else if (r < 0.85) { cr = amber[0]; cg = amber[1]; cb = amber[2]; bb = 1.05 + Math.random() * 0.5; }
-            else { cr = plum[0] * 1.5; cg = plum[1] * 1.5; cb = plum[2] * 1.5; bb = 0.85 + Math.random() * 0.4; }
-            col[k * 3] = cr * bb; col[k * 3 + 1] = cg * bb; col[k * 3 + 2] = cb * bb;
-            siz[k] = (r < 0.20 ? 4.2 + Math.random() * 3.6 : 2.2 + Math.random() * 2.2);
+            siz[k] = (rClass[k] < 0.20 ? 4.2 + Math.random() * 3.6 : 2.2 + Math.random() * 2.2);
           } else {
             depth[k] = 0.22 + Math.random() * 0.5;
-            const dim = 0.3 + Math.random() * 0.45;
-            col[k * 3] = amber[0] * dim; col[k * 3 + 1] = amber[1] * dim; col[k * 3 + 2] = amber[2] * dim * 0.85;
             siz[k] = 1.1 + Math.random() * 1.8;
           }
         }
+        // Dark theme: bright cream/amber/plum sparks tuned for additive blending on
+        // a near-black field. Light theme: warm ink tones for normal blending, since
+        // additive light is invisible over a bright background.
+        const paintParticles = (light) => {
+          for (let k = 0; k < N; k++) {
+            const r = rClass[k], b = bright[k];
+            let cr, cg, cb, bb = 1;
+            if (k < FORM) {
+              if (!light) {
+                if (r < 0.20) { cr = 1.0; cg = 0.93; cb = 0.78; bb = 1.5 + b * 0.7; }
+                else if (r < 0.85) { cr = amber[0]; cg = amber[1]; cb = amber[2]; bb = 1.05 + b * 0.5; }
+                else { cr = plum[0] * 1.5; cg = plum[1] * 1.5; cb = plum[2] * 1.5; bb = 0.85 + b * 0.4; }
+              } else {
+                if (r < 0.20) { cr = 0.62; cg = 0.40; cb = 0.16; bb = 0.95 + b * 0.25; }
+                else if (r < 0.85) { cr = 0.50; cg = 0.31; cb = 0.15; bb = 0.9 + b * 0.25; }
+                else { cr = 0.34; cg = 0.24; cb = 0.30; bb = 0.85 + b * 0.25; }
+              }
+            } else {
+              if (!light) { const dim = 0.3 + b * 0.45; cr = amber[0] * dim; cg = amber[1] * dim; cb = amber[2] * dim * 0.85; }
+              else { const dim = 0.45 + b * 0.35; cr = 0.52 * dim; cg = 0.36 * dim; cb = 0.20 * dim; }
+            }
+            col[k * 3] = cr * bb; col[k * 3 + 1] = cg * bb; col[k * 3 + 2] = cb * bb;
+          }
+          if (this.geo) this.geo.attributes.aColor.needsUpdate = true;
+          material.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending;
+          material.uniforms.uLight.value = light ? 1.0 : 0.0;
+          material.needsUpdate = true;
+        };
+        const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+        paintParticles(isLight());
         // small per-particle jitter so wrap-around targets don't overlap exactly
         const jit = new Float32Array(N * 2);
         for (let k = 0; k < N; k++) { jit[k * 2] = (Math.random() - 0.5) * 7; jit[k * 2 + 1] = (Math.random() - 0.5) * 7; }
@@ -717,6 +747,11 @@ const eyebrow = `${profile.role}  /  ${profile.yearsExperience} years in product
         points.frustumCulled = false;
         scene.add(points);
         this.geo = geo;
+
+        // Recolour + re-blend the field when the user flips the theme.
+        const onTheme = () => paintParticles(isLight());
+        window.addEventListener('themechange', onTheme);
+        this.disposers.push(() => window.removeEventListener('themechange', onTheme));
 
         // anchor each formation to the scroll position where its section sits centered
         let anchors = new Array(sectionKeys.length).fill(0);

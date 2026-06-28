@@ -13,7 +13,7 @@ interface Props {
 
 const {
   title,
-  description = "Senior Fullstack Engineer building products end to end — Vue, React, TypeScript, Node.js, NestJS, PHP/Symfony and Laravel.",
+  description = "Senior Fullstack Engineer building products end to end with Vue, React, TypeScript, Node.js, NestJS, PHP/Symfony and Laravel.",
   image = "/og.png",
   ogType = "website",
   noindex = false,
@@ -52,7 +52,7 @@ const person = {
 const website = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: `${profile.name} — Portfolio`,
+  name: `${profile.name} · Portfolio`,
   url: site.href,
   inLanguage: "en",
   author: { "@type": "Person", name: profile.name },
@@ -66,6 +66,36 @@ const structured = [person, website, ...jsonLd];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Resolve the theme before first paint: stored choice wins, otherwise the
+         OS preference. Setting data-theme synchronously here avoids any flash. -->
+    <script is:inline>
+      (function () {
+        var KEY = "theme";
+        var root = document.documentElement;
+        var stored = null;
+        try { stored = localStorage.getItem(KEY); } catch (e) {}
+        var system = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        var theme = stored === "light" || stored === "dark" ? stored : system;
+        root.setAttribute("data-theme", theme);
+        function apply(t) {
+          root.setAttribute("data-theme", t);
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", t === "light" ? "#f4efe6" : "#1e1813");
+        }
+        apply(theme);
+        window.__theme = {
+          get: function () { return theme; },
+          set: function (t) {
+            theme = t;
+            apply(t);
+            try { localStorage.setItem(KEY, t); } catch (e) {}
+            window.dispatchEvent(new CustomEvent("themechange", { detail: { theme: t } }));
+          },
+        };
+      })();
+    </script>
+
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -88,7 +118,7 @@ const structured = [person, website, ...jsonLd];
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={`${profile.name} — ${profile.role}`} />
+    <meta property="og:image:alt" content={`${profile.name} · ${profile.role}`} />
     <meta property="og:locale" content="en_US" />
 
     <!-- Twitter -->
@@ -96,7 +126,7 @@ const structured = [person, website, ...jsonLd];
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content={`${profile.name} — ${profile.role}`} />
+    <meta name="twitter:image:alt" content={`${profile.name} · ${profile.role}`} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -112,5 +142,47 @@ const structured = [person, website, ...jsonLd];
   </head>
   <body>
     <slot />
+
+    <!-- Wire every [data-theme-toggle] on the page and keep their icons in sync.
+         Icon shows the theme you'll switch TO (sun while dark, moon while light). -->
+    <script is:inline>
+      (function () {
+        var SUN =
+          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>';
+        var MOON =
+          '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+        function current() {
+          return (window.__theme && window.__theme.get()) || document.documentElement.getAttribute("data-theme") || "dark";
+        }
+        function paint() {
+          var light = current() === "light";
+          // The init script runs before <meta name="theme-color"> is parsed, so
+          // its first write no-ops; reconcile it here once the DOM is ready.
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", light ? "#f4efe6" : "#1e1813");
+          var btns = document.querySelectorAll("[data-theme-toggle]");
+          for (var i = 0; i < btns.length; i++) {
+            btns[i].innerHTML = light ? MOON : SUN;
+            btns[i].setAttribute("aria-label", light ? "Switch to dark theme" : "Switch to light theme");
+            btns[i].setAttribute("title", light ? "Switch to dark theme" : "Switch to light theme");
+          }
+        }
+        function wire() {
+          var btns = document.querySelectorAll("[data-theme-toggle]");
+          for (var i = 0; i < btns.length; i++) {
+            if (btns[i].__wired) continue;
+            btns[i].__wired = true;
+            btns[i].addEventListener("click", function () {
+              if (!window.__theme) return;
+              window.__theme.set(window.__theme.get() === "light" ? "dark" : "light");
+            });
+          }
+          paint();
+        }
+        window.addEventListener("themechange", paint);
+        if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wire);
+        else wire();
+      })();
+    </script>
   </body>
 </html>

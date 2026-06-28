@@ -1,3 +1,105 @@
+/* ----------------------------------------------------------------------------
+   Theme tokens.
+
+   The whole palette lives here as custom properties so a single `data-theme`
+   attribute on <html> swaps the site between dark (default/brand) and light.
+   `:root` carries the dark theme; `[data-theme="light"]` overrides it. An inline
+   script in Base.astro sets the attribute before first paint (stored choice ->
+   system preference), so there is no flash. The @media block is a no-JS fallback
+   that mirrors the light overrides for users with a light OS preference.
+
+   Semantic tokens (shadows, glows, image wells, chrome, vignette) exist so the
+   pages never hardcode a raw colour that only reads well on one background.
+---------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+
+  --bg: oklch(0.17 0.015 50);
+  --surface: oklch(0.22 0.02 50);
+  --text: oklch(0.93 0.012 85);
+  --dim: oklch(0.68 0.015 75);
+  --accent: oklch(0.74 0.17 55);
+  --plum: oklch(0.3 0.06 350);
+  --line: oklch(0.32 0.02 50);
+
+  /* text/icons that sit on top of an --accent fill */
+  --on-accent: oklch(0.16 0.015 50);
+  /* recessed panel behind project screenshots */
+  --img-well: oklch(0.18 0.018 50);
+  /* faux browser-chrome bar */
+  --chrome: oklch(0.165 0.018 50);
+  /* faux window traffic-light dots */
+  --dot: oklch(0.5 0.02 50);
+  /* accent halo behind cards/heroes */
+  --glow: oklch(0.74 0.17 55 / 0.14);
+  --glow-strong: oklch(0.74 0.17 55 / 0.28);
+  /* drop shadows under floating screenshots */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-strong: rgba(0, 0, 0, 0.85);
+  --shadow-card: rgba(0, 0, 0, 0.75);
+  --logo-shadow: rgba(0, 0, 0, 0.6);
+  /* page-edge vignette + scrollbar + selection */
+  --vignette: oklch(0.12 0.02 50 / 0.6);
+  --scrollbar: oklch(0.3 0.02 50);
+  --selection-fg: var(--on-accent);
+  /* default cursor-ring blend (screen glows on dark) */
+  --ring-blend: screen;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --bg: oklch(0.965 0.008 85);
+  --surface: oklch(0.995 0.004 90);
+  --text: oklch(0.26 0.022 55);
+  --dim: oklch(0.47 0.02 60);
+  --accent: oklch(0.6 0.19 47);
+  --plum: oklch(0.45 0.08 350);
+  --line: oklch(0.88 0.012 75);
+
+  --on-accent: oklch(0.99 0.01 90);
+  --img-well: oklch(0.93 0.008 80);
+  --chrome: oklch(0.91 0.01 80);
+  --dot: oklch(0.8 0.012 70);
+  --glow: oklch(0.7 0.16 50 / 0.12);
+  --glow-strong: oklch(0.6 0.18 47 / 0.18);
+  --shadow-color: rgba(40, 30, 22, 0.12);
+  --shadow-strong: rgba(40, 30, 22, 0.16);
+  --shadow-card: rgba(40, 30, 22, 0.18);
+  --logo-shadow: rgba(40, 30, 22, 0.16);
+  --vignette: oklch(0.7 0.02 80 / 0);
+  --scrollbar: oklch(0.82 0.012 70);
+  --ring-blend: normal;
+}
+
+/* No-JS fallback: honour a light OS preference until the inline script pins
+   an explicit data-theme. Mirrors the [data-theme="light"] block above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    color-scheme: light;
+    --bg: oklch(0.965 0.008 85);
+    --surface: oklch(0.995 0.004 90);
+    --text: oklch(0.26 0.022 55);
+    --dim: oklch(0.47 0.02 60);
+    --accent: oklch(0.6 0.19 47);
+    --plum: oklch(0.45 0.08 350);
+    --line: oklch(0.88 0.012 75);
+    --on-accent: oklch(0.99 0.01 90);
+    --img-well: oklch(0.93 0.008 80);
+    --chrome: oklch(0.91 0.01 80);
+    --dot: oklch(0.8 0.012 70);
+    --glow: oklch(0.7 0.16 50 / 0.12);
+    --glow-strong: oklch(0.6 0.18 47 / 0.18);
+    --shadow-color: rgba(40, 30, 22, 0.12);
+    --shadow-strong: rgba(40, 30, 22, 0.16);
+    --shadow-card: rgba(40, 30, 22, 0.18);
+    --logo-shadow: rgba(40, 30, 22, 0.16);
+    --vignette: oklch(0.7 0.02 80 / 0);
+    --scrollbar: oklch(0.82 0.012 70);
+    --ring-blend: normal;
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +107,7 @@
 }
 html,
 body {
-  background: oklch(0.17 0.015 50);
+  background: var(--bg);
 }
 body {
   -webkit-font-smoothing: antialiased;
@@ -16,18 +118,41 @@ a {
   text-decoration: none;
 }
 ::selection {
-  background: oklch(0.74 0.17 55);
-  color: oklch(0.16 0.015 50);
+  background: var(--accent);
+  color: var(--selection-fg);
 }
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: oklch(0.3 0.02 50);
+  background: var(--scrollbar);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
   background: transparent;
+}
+
+/* Theme toggle button (shared across nav + case-study headers) */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 0.3s, border-color 0.3s, transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.theme-toggle:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.theme-toggle svg {
+  display: block;
 }
 
 /* Featured case-study block */
